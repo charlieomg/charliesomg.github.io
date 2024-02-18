@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <meta name="description" content="Just Google, don't open unless you are a person. if you are a alien you are welcomed just dont be alienish.">
+    <link rel="icon" type="image/x-icon" href="https://www.google.com/favicon.ico">
+    <style>
+        #iframe-container {
+            position: relative;
+            padding-bottom: 30px; /* Heieght of the warning message */
+            margin-bottom: 20px; /* Space between the iframes */
+        }
+        #warning-message, #proxy-message {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            display: none; /* Initially hide the warning and proxy message */
+        }
+    </style>
+</head>
+<body>
+<div id="iframe-container">
+    <iframe id="myIframe" width="100%" height="500"></iframe>
+    <div id="warning-message">Website may not work due to an error in the website being shown.</div>
+</div>
+
+<p>Another proxy</p>
+
+<div id="proxy-iframe-container">
+    <iframe id="proxyIframe" width="100%" height="500"></iframe>
+    <div id="proxy-message">Proxy error message here.</div>
+</div>
+
+<script>
+    const iframe = document.getElementById('myIframe');
+    const warningMessage = document.getElementById('warning-message');
+    const proxyIframe = document.getElementById('proxyIframe');
+    const proxyMessage = document.getElementById('proxy-message');
+
+    iframe.src = 'https://8080-charlieomg-noway-8uvipk5cyi9.ws-us108.gitpod.io/app'; // Initial website shown in the first iframe
+
+    iframe.onload = function() {
+        if (iframe.contentWindow.location.href !== 'https://8080-charlieomg-noway-8uvipk5cyi9.ws-us108.gitpod.io/app') {
+            iframe.src = iframe.contentWindow.location.href;
+        }
+    };
+
+    iframe.onerror = function() {
+        warningMessage.style.display = 'block';
+    };
+
+    // Second iframe handling redirects
+    proxyIframe.src = 'https://utels.zite.ink/'; // Initial website shown in the second iframe
+
+    proxyIframe.onload = function() {
+        if (proxyIframe.contentWindow.location.href !== 'https://example-proxy.com') {
+            proxyIframe.src = proxyIframe.contentWindow.location.href;
+        }
+    };
+
+    proxyIframe.onerror = function() {
+        proxyMessage.style.display = 'block';
+    };
+</script>
+</body>
+</html>
